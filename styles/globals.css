@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background-color: black;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+svg,
+path,
+rect {
+  shape-rendering: crispEdges !important;
+  image-rendering: crisp-edges !important;
+}
