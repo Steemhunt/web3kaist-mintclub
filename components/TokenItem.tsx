@@ -153,7 +153,9 @@ function BuySellButtons(
             {customShortenNumber(estimation)}
           </div>
         )}
-        <div className="text-[10px] text-gray-500">{commify(estimation)}원</div>
+        <div className="text-[10px] text-gray-500">
+          {commify(estimation * 1000)}원
+        </div>
       </div>
 
       <div className="relative mt-5 flex gap-2 text-sm">
