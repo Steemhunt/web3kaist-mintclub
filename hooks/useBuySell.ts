@@ -54,26 +54,10 @@ export default function useBuySell(
   async function buy(onSuccess: () => void) {
     try {
       setLoading(true);
-      // TODO: buy token using sdk
-      await mintclub
-        .network('base')
-        .nft(tokenAddress)
-        .buy({
-          amount: BigInt(amount),
-          onAllowanceSignatureRequest: () => {
-            toast('🔓 컨트랙트의 토큰사용을 허용해주세요');
-          },
-          onAllowanceSuccess: () => {
-            toast.success('허용되었습니다. 구매를 진행해주세요');
-          },
-          debug: (e) => {
-            console.log(e);
-          },
-          onSuccess,
-          onError: (e: any) => {
-            console.error(e);
-          },
-        });
+      // TODO: Mission 8: buy NFT using sdk
+      // https://sdk.mint.club/docs/sdk/network/nft/buy
+
+      // ...
     } finally {
       setLoading(false);
     }
@@ -82,24 +66,10 @@ export default function useBuySell(
   async function sell(onSuccess: () => void) {
     try {
       setLoading(true);
-      // TODO: sell token using sdk
+      // TODO: Mission 9: sell NFT using sdk
+      // https://sdk.mint.club/docs/sdk/network/nft/sell
 
-      await mintclub
-        .network('base')
-        .nft(tokenAddress)
-        .sell({
-          amount: BigInt(amount),
-          onAllowanceSignatureRequest: () => {
-            toast('🔓 컨트랙트의 토큰사용을 허용해주세요');
-          },
-          onAllowanceSuccess: () => {
-            toast.success('허용되었습니다. 판매를 진행해주세요');
-          },
-          onSuccess,
-          onError: (e: any) => {
-            console.error(e);
-          },
-        });
+      // ...
     } finally {
       setLoading(false);
     }

@@ -22,22 +22,20 @@ export default function useNft(address?: `0x${string}` | null) {
       }
 
       setLoading(true);
-      // TODO: fetch token detail using sdk
-      const nft = mintclub.network('base').nft(address);
-      const {
-        info: { name, token, priceForNextMint, currentSupply, maxSupply },
-      } = await nft.getDetail();
+      // TODO: Mission 6: fetch NFT detail using sdk
+      // https://sdk.mint.club/docs/sdk/network/bond
 
-      const imageUrl = await nft.getImageUri().catch(() => '');
+      // ...
 
-      setData({
-        name,
-        maxSupply: Number(maxSupply),
-        image: imageUrl,
-        price: toNumber(priceForNextMint, 18),
-        sold: Number(currentSupply),
-        address: token,
-      });
+      // 아래 주석에 필요한 값들 불러오기. 후에 주석 제거
+      // setData({
+      //   name,
+      //   maxSupply: Number(maxSupply),
+      //   image: imageUrl,
+      //   price: toNumber(priceForNextMint, 18),
+      //   sold: Number(currentSupply),
+      //   address: token,
+      // });
       setLoading(false);
     } catch (e) {
       console.error(e);
