@@ -103,7 +103,7 @@ function BuySellButtons(
     Number(input),
   );
 
-  const notEnoughBalance = krwBalance < estimation;
+  const notEnoughBalance = input && !estimating && krwBalance < estimation;
 
   function reset() {
     setTradeType(null);
