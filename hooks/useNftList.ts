@@ -22,6 +22,8 @@ export default function useNftList() {
 
   useEffect(() => {
     fetchList();
+
+    // eslint-disable-next-line
   }, []);
 
   return { list, refresh: fetchList };

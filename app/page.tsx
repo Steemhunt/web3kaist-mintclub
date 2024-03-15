@@ -1,5 +1,4 @@
 'use client';
-import Button from '@/components/Button';
 import Loading from '@/components/Loading';
 import Logo from '@/components/Logo';
 import TokenItem from '@/components/TokenItem';
@@ -10,7 +9,7 @@ export default function Home() {
   const { list, refresh } = useNftList();
   return (
     <div className="flex h-full w-full flex-col items-center padded-horizontal-narrow">
-      <Logo className="hidden text-5xl mobile:block" />
+      <Logo className="hidden text-[200px] mobile:block" />
 
       {list.length === 0 && <Loading className="mt-5" />}
 
