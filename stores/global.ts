@@ -14,5 +14,5 @@ export const useGlobalStore = create<GlobalState>((set) => ({
   account: null,
   userLoading: true,
   list: [],
-  collapsed: false,
+  collapsed: true,
 }));
