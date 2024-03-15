@@ -13,28 +13,17 @@ export default function useCreate(symbol: string) {
     onSuccess: () => void,
     onError: (err: any) => void,
   ) {
-    // TODO: create NFT using sdk
-    await mintclub
-      .network('base')
-      .nft(symbol)
-      .create({
-        name: symbol,
-        reserveToken: {
-          address: CHUNWON_TOKEN_ADDRESS, // 1,000 KRW
-          decimals: 18,
-        },
-        curveData: {
-          curveType: 'EXPONENTIAL',
-          stepCount: 10, // how granular the curve is
-          maxSupply: 10_000, // NFT max supply
-          initialMintingPrice: 1, // starting price, 천원
-          finalMintingPrice: 100_000, // ending price, 일억
-          creatorAllocation: 1, // initial supply to the deployer = 1 = self follow
-        },
-        metadataUrl,
-        onSuccess,
-        onError,
-      });
+    // TODO: Mission 4: create NFT using sdk
+    const curveData = {
+      curveType: 'EXPONENTIAL',
+      stepCount: 10, // how granular the curve is
+      maxSupply: 10_000, // NFT max supply
+      initialMintingPrice: 1, // starting price, 천원
+      finalMintingPrice: 100_000, // ending price, 일억
+      creatorAllocation: 1, // initial supply to the deployer = 1 = self follow
+    };
+
+    // ...
   }
 
   async function checkExisting(symbol: string) {

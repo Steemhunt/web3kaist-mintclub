@@ -10,7 +10,6 @@ export default function useWallet() {
 
   async function syncAccount() {
     useGlobalStore.setState({ userLoading: true });
-    // TODO: check if user is already connected
     const currentAddress = await mintclub.wallet.account();
     useGlobalStore.setState({ account: currentAddress });
     useGlobalStore.setState({ userLoading: false });
@@ -19,8 +18,8 @@ export default function useWallet() {
   async function connect() {
     try {
       useGlobalStore.setState({ userLoading: true });
-      // TODO: connect wallet using sdk
-      await mintclub.wallet.connect();
+      // TODO: Mission 1: connect wallet using sdk
+      // ...
     } catch (e: any) {
       console.error(e);
       toast.error(e?.message);
@@ -34,14 +33,14 @@ export default function useWallet() {
   }, []);
 
   async function disconnect() {
-    // TODO: disconnect wallet using sdk
-    await mintclub.wallet.disconnect();
+    // TODO: Mission 2: disconnect wallet using sdk
+    // ...
     await syncAccount();
   }
 
   async function change() {
-    // TODO: change wallet using sdk
-    await mintclub.wallet.change();
+    // TODO: Mission 3: change wallet using sdk
+    // ...
     await syncAccount();
   }
 
