@@ -62,7 +62,10 @@ export default function TokenItem(props: { tokenAddress: `0x${string}` }) {
         <div className="flex w-1/2 flex-col text-center">
           <span className="text-sm  text-gray-500">현재 가격</span>
           <span className="mt-1 font-bold text-green-500">
-            {commify(shortenNumber(price * 1000))}원
+            {price * 1000 > 1_000_000
+              ? commify(shortenNumber(price * 1000).replace('K', '천'))
+              : commify(price * 1000)}
+            원
           </span>
         </div>
       </div>
