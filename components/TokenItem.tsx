@@ -103,6 +103,8 @@ function BuySellButtons(
     Number(input),
   );
 
+  const notEnoughBalance = krwBalance < estimation;
+
   function reset() {
     setTradeType(null);
     setInput(0);
@@ -171,7 +173,7 @@ function BuySellButtons(
           className="w-full bg-green-500 text-black"
           loading={estimating || txLoading}
           spinnerColor="grey"
-          disabled={!account || !input}
+          disabled={!account || !input || notEnoughBalance}
           onClick={async () => {
             console.log('buy or sell');
             try {
@@ -199,6 +201,11 @@ function BuySellButtons(
           </div>
         )}
       </div>
+      {notEnoughBalance && (
+        <div className="mt-5 text-center text-xs text-red-500">
+          잔고가 부족합니다
+        </div>
+      )}
       <div className="mt-5 flex items-center text-xs text-gray-500">
         현재{' '}
         <span className="mx-1 flex items-center text-white">
