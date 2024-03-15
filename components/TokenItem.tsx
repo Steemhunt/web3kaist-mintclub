@@ -201,7 +201,7 @@ function BuySellButtons(
           </div>
         )}
       </div>
-      {notEnoughBalance && (
+      {!!notEnoughBalance && (
         <div className="mt-5 text-center text-xs text-red-500">
           잔고가 부족합니다
         </div>
