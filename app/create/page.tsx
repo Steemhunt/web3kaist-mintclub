@@ -56,7 +56,7 @@ export default function CreatePage() {
         ref={uploadRef}
         className="hidden"
         type="file"
-        accept="image/*"
+        accept="image/png, image/jpeg, image/gif, image/webp, image/jpg"
         max={1}
         onChange={(e) => {
           const file = e.target.files?.[0];
