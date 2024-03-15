@@ -11,7 +11,7 @@ import { useGlobalStore } from '@/stores/global';
 import { abbreviateAddress } from '@/utils/strings';
 import { useDebounce } from '@uidotdev/usehooks';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -31,7 +31,7 @@ export default function CreatePage() {
   const { checkingProfile } = useProfile();
 
   if (!account) {
-    router.replace('/login');
+    redirect('/login');
   }
 
   if (isUserLoading || checkingProfile) {
@@ -47,7 +47,7 @@ export default function CreatePage() {
       id: 'profile-exists',
     });
 
-    router.replace('/');
+    redirect('/');
   }
 
   return (

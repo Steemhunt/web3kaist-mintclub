@@ -5,14 +5,13 @@ import Loading from '@/components/Loading';
 import Logo from '@/components/Logo';
 import useWallet from '@/hooks/useWallet';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 export default function LoginPage() {
-  const router = useRouter();
   const { account, isUserLoading, connect } = useWallet();
 
   if (account) {
-    router.replace('/create');
+    redirect('/create');
   }
 
   if (isUserLoading) {
