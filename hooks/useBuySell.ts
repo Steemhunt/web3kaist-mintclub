@@ -64,7 +64,13 @@ export default function useBuySell(
             toast('🔓 컨트랙트의 토큰사용을 허용해주세요');
           },
           onAllowanceSuccess: () => {
-            toast.success('허용되었습니다. 구매를 진행해주세요');
+            toast.success('허용되었습니다');
+          },
+          onSignatureRequest: () => {
+            toast('🖊️ 트랜잭션을 승인해주세요');
+          },
+          onSigned: () => {
+            toast.success('🚀 트랜잭션이 성공적으로 전송되었습니다');
           },
           debug: (e) => {
             console.log(e);
@@ -72,6 +78,7 @@ export default function useBuySell(
           onSuccess,
           onError: (e: any) => {
             console.error(e);
+            toast.error('구매에 실패했습니다. 콘솔을 확인해주세요');
           },
         });
     } finally {
@@ -93,11 +100,21 @@ export default function useBuySell(
             toast('🔓 컨트랙트의 토큰사용을 허용해주세요');
           },
           onAllowanceSuccess: () => {
-            toast.success('허용되었습니다. 판매를 진행해주세요');
+            toast.success('허용되었습니다');
+          },
+          onSignatureRequest: () => {
+            toast('🖊️ 트랜잭션을 승인해주세요');
+          },
+          onSigned: () => {
+            toast.success('🚀 트랜잭션이 성공적으로 전송되었습니다');
+          },
+          debug: (e) => {
+            console.log(e);
           },
           onSuccess,
           onError: (e: any) => {
             console.error(e);
+            toast.error('구매에 실패했습니다. 콘솔을 확인해주세요');
           },
         });
     } finally {
