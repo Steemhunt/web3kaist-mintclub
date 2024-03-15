@@ -1,3 +1,4 @@
+import { CHUNWON_TOKEN_ADDRESS } from '@/constants';
 import useWallet from '@/hooks/useWallet';
 import { useGlobalStore } from '@/stores/global';
 import { mintclub, toNumber } from 'mint.club-v2-sdk';
@@ -16,11 +17,25 @@ export default function useProfile() {
         .bond.getTokensByCreator(account);
 
       if (tokens.length > 0) {
-        const nft = mintclub.network('base').nft(tokens[0]);
-        const priceForNextMint = await nft.getPriceForNextMint();
-        useGlobalStore.setState({
-          myPrice: toNumber(priceForNextMint, 18),
-        });
+        for (const token of tokens) {
+          const exists = await mintclub.network('base').nft(token).exists();
+          if (!exists) continue;
+
+          const reserveToken = await mintclub
+            .network('base')
+            .nft(token)
+            .getReserveToken()
+            .catch();
+
+          if (reserveToken?.address === CHUNWON_TOKEN_ADDRESS) {
+            const nft = mintclub.network('base').nft(token);
+            const priceForNextMint = await nft.getPriceForNextMint();
+            useGlobalStore.setState({
+              myPrice: toNumber(priceForNextMint, 18),
+            });
+            break;
+          }
+        }
       } else {
         useGlobalStore.setState({ myPrice: undefined });
       }

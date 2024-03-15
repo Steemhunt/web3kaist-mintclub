@@ -87,7 +87,7 @@ function HeaderButtons() {
 
       <div
         className={cn(
-          'absolute bottom-20 left-0 z-[30] flex grid w-screen flex-col items-center gap-3 p-5 text-sm mobile:relative mobile:bottom-0 mobile:flex mobile:flex mobile:w-auto mobile:flex-row mobile:gap-2',
+          'fixed bottom-20 left-0 z-[30] flex grid w-screen flex-col items-center gap-3 p-5 text-sm mobile:relative mobile:bottom-0 mobile:flex mobile:flex mobile:w-auto mobile:flex-row mobile:gap-2',
           collapsed ? 'hidden' : 'mobile:flex',
         )}
       >
