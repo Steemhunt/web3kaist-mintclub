@@ -7,7 +7,7 @@ import useERC20Balance from '@/hooks/useERC20Balance';
 import useNftBalance from '@/hooks/useNftBalance';
 import useNft, { NftDetail } from '@/hooks/useNft';
 import useWallet from '@/hooks/useWallet';
-import { abbreviateAddress } from '@/utils/strings';
+import { abbreviateAddress, customShortenNumber } from '@/utils/strings';
 import { commify, shortenNumber, uncommify } from 'mint.club-v2-sdk';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -62,10 +62,7 @@ export default function TokenItem(props: { tokenAddress: `0x${string}` }) {
         <div className="flex w-1/2 flex-col text-center">
           <span className="text-sm  text-gray-500">현재 가격</span>
           <span className="mt-1 font-bold text-green-500">
-            {price * 1000 > 1_000_000
-              ? commify(shortenNumber(price * 1000).replace('K', '천'))
-              : commify(price * 1000)}
-            원
+            {customShortenNumber(price)}
           </span>
         </div>
       </div>
@@ -153,7 +150,7 @@ function BuySellButtons(
           <div className="text-yellow-500">가격 계산중...</div>
         ) : (
           <div className="text-green-500">
-            {commify(shortenNumber(estimation))}원
+            {customShortenNumber(estimation)}
           </div>
         )}
         <div className="text-[10px] text-gray-500">{commify(estimation)}원</div>
