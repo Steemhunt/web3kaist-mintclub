@@ -173,7 +173,7 @@ function BuySellButtons(
           className="w-full bg-green-500 text-black"
           loading={estimating || txLoading}
           spinnerColor="grey"
-          disabled={!account || !input || notEnoughBalance}
+          disabled={!account || !input || !!notEnoughBalance}
           onClick={async () => {
             console.log('buy or sell');
             try {
