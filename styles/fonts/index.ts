@@ -1,8 +1,8 @@
-import { Just_Another_Hand, Noto_Sans_KR } from 'next/font/google';
+import { Bebas_Neue } from 'next/font/google';
 
-const handwriting = Just_Another_Hand({
+const bebas = Bebas_Neue({
   subsets: ['latin'],
   weight: ['400'],
 });
 
-export { handwriting };
+export { bebas };

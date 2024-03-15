@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'mint.club',
       },
+      {
+        protocol: 'https',
+        hostname: 'cf-ipfs.com',
+      },
     ],
   },
 

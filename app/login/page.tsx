@@ -1,42 +1,39 @@
 'use client';
 
 import Button from '@/components/Button';
+import Loading from '@/components/Loading';
+import Logo from '@/components/Logo';
 import useWallet from '@/hooks/useWallet';
-import { handwriting } from '@/styles/fonts';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter();
   const { account, isUserLoading, connect } = useWallet();
+
+  if (account) {
+    router.replace('/create');
+  }
 
   if (isUserLoading) {
     return (
-      <div
-        className="flex h-full w-full items-center justify-center text-2xl"
-        style={handwriting.style}
-      >
-        Loading user...
+      <div className="flex  h-full w-full justify-center text-2xl">
+        <Loading />
       </div>
     );
   }
 
-  if (account) {
-    redirect('/create');
-  }
-
   return (
-    <div className="flex h-full w-full items-center justify-center padded-horizontal">
+    <div className="flex h-full w-full items-start justify-center padded-horizontal">
       <div className="flex w-[300px] flex-col items-center justify-center border border-white/20 bg-black/80 p-10">
-        <div className="text-5xl text-primary" style={handwriting.style}>
-          Kainstagram
-        </div>
+        <Logo />
 
         <div className="my-10 text-center">
           메타마스크로 회원가입 또는 로그인하세요
         </div>
 
         <Button
-          className="mt-10 w-full border-2 border-metamask text-white"
+          className="mt-10 w-full"
           onClick={async () => {
             await connect();
           }}

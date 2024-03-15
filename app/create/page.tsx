@@ -1,43 +1,57 @@
 'use client';
 
 import Button from '@/components/Button';
+import Loading from '@/components/Loading';
+import Logo from '@/components/Logo';
 import useCreate from '@/hooks/useCreate';
+import useProfile from '@/hooks/useProfile';
 import useWallet from '@/hooks/useWallet';
 import { uploadImage, uploadMetadata } from '@/server/ipfs';
-import { handwriting } from '@/styles/fonts';
+import { useGlobalStore } from '@/stores/global';
+import { abbreviateAddress } from '@/utils/strings';
 import { useDebounce } from '@uidotdev/usehooks';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export default function CreatePage() {
-  const { account, isUserLoading, connect } = useWallet();
+  const router = useRouter();
+  const { account, isUserLoading, change } = useWallet();
   const uploadRef = useRef<HTMLInputElement>(null);
   const [username, setUsername] = useState('');
   const [file, setFile] = useState<Blob | null>(null);
   const [imgUrl, setImageUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const debouncedUsername = useDebounce(username, 150);
-  const loading = debouncedUsername !== username;
-  const { createProfile, checking, exists } = useCreate(debouncedUsername);
+  const usernameLoading = debouncedUsername !== username;
+  const myPrice = useGlobalStore((state) => state.myPrice);
+  const { createProfile, checkingUsername, exists } =
+    useCreate(debouncedUsername);
+  const { checkingProfile } = useProfile();
 
-  if (isUserLoading) {
+  if (!account) {
+    router.replace('/login');
+  }
+
+  if (isUserLoading || checkingProfile) {
     return (
-      <div
-        className="flex h-full w-full items-center justify-center text-2xl"
-        style={handwriting.style}
-      >
-        Loading user...
+      <div className="flex h-full w-full justify-center text-2xl">
+        <Loading />
       </div>
     );
   }
 
-  if (!account) {
-    redirect('/login');
+  if (myPrice) {
+    toast.error('이미 프로필이 존재합니다', {
+      id: 'profile-exists',
+    });
+
+    router.replace('/');
   }
 
   return (
-    <div className="flex h-full w-full items-center justify-center padded-horizontal">
+    <div className="flex h-full w-full items-start justify-center padded-horizontal">
       <input
         ref={uploadRef}
         className="hidden"
@@ -57,9 +71,7 @@ export default function CreatePage() {
         }}
       />
       <div className="flex w-[300px] flex-col items-center justify-center border border-white/20 bg-black/80 p-10">
-        <div className="text-5xl text-primary" style={handwriting.style}>
-          Kainstagram
-        </div>
+        <Logo />
 
         <div className="my-10 flex flex-col items-center justify-center">
           <div className="text-sm font-bold text-white">프로필 사진 추가</div>
@@ -70,6 +82,9 @@ export default function CreatePage() {
               height={100}
               className="mt-4 flex h-[100px] w-[100px] cursor-pointer flex-col items-center justify-center rounded-full"
               alt="pic"
+              onClick={() => {
+                uploadRef.current?.click();
+              }}
             />
           ) : (
             <div
@@ -85,7 +100,7 @@ export default function CreatePage() {
           <div className="mt-10 text-sm font-bold text-white">유저이름</div>
           <input
             className="border-b border-white bg-transparent p-2 text-center text-white outline-none"
-            placeholder="e.g. ggoma.is.cool"
+            placeholder="e.g. cool_ggoma"
             value={username}
             maxLength={15}
             onChange={(e) => {
@@ -98,7 +113,7 @@ export default function CreatePage() {
               setUsername(value);
             }}
           />
-          {!loading && username && !checking && (
+          {!usernameLoading && username && !checkingUsername && (
             <div className="mt-2 text-xs">
               {exists ? (
                 <div className="text-red-500">이미 존재하는 유저이름입니다</div>
@@ -107,40 +122,68 @@ export default function CreatePage() {
               )}
             </div>
           )}
-          {(checking || checking || loading) && (
+          {(checkingUsername || checkingUsername || usernameLoading) && (
             <div className="mt-2 text-xs text-gray-500">체크중...</div>
           )}
         </div>
 
         <Button
           className="mt-10 w-full bg-primary text-black"
-          disabled={checking || exists || loading || !username}
+          disabled={checkingUsername || exists || usernameLoading || !username}
+          loading={loading}
           onClick={async () => {
-            if (!file) {
+            if (!file || !imgUrl) {
               toast.error('프로필 사진을 추가해주세요');
               return;
             }
             try {
+              setLoading(true);
+
               const imageForm = new FormData();
               imageForm.append('file', file);
+              toast('🖼️ 이미지 업로드 중');
               const imageUrl = await uploadImage(imageForm);
-              console.log({ imageUrl });
+              toast.success('🖼️ 이미지 업로드 완료!');
+
               const metadataForm = new FormData();
               metadataForm.append('image', imageUrl);
               metadataForm.append('name', username);
+              toast('📁 메타데이터 업로드 중..');
               const metadataUrl = await uploadMetadata(metadataForm);
-              console.log({ metadataUrl });
-              await createProfile(metadataUrl, () => {
-                redirect('/');
-              });
+              toast.success('📁 메타데이터 업로드 완료!');
+
+              await createProfile(
+                metadataUrl,
+                () => {
+                  router.replace('/');
+                },
+                (err: any) => {
+                  toast.error(err?.message);
+                  setLoading(false);
+                },
+              );
             } catch (e: any) {
               console.error(e);
               toast.error(e);
+              setLoading(false);
             }
           }}
         >
           계정 생성하기
         </Button>
+
+        <div className="mt-5 font-bold text-primary">
+          {abbreviateAddress(account || '')}
+        </div>
+
+        <div
+          className="mt-5 cursor-pointer text-sm font-bold text-gray-500"
+          onClick={async () => {
+            await change();
+          }}
+        >
+          다른 지갑 연결하기
+        </div>
       </div>
     </div>
   );

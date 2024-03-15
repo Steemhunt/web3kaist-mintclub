@@ -1,38 +1,55 @@
 'use client';
+import { useGlobalStore } from '@/stores/global';
 import { mintclub } from 'mint.club-v2-sdk';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 export default function useWallet() {
-  const [account, setAccount] = useState<`0x${string}` | null>(null);
-  const [isUserLoading, setLoading] = useState(true);
+  const account = useGlobalStore((state) => state.account);
+  const userLoading = useGlobalStore((state) => state.userLoading);
+
+  async function syncAccount() {
+    useGlobalStore.setState({ userLoading: true });
+    // TODO: check if user is already connected
+    const currentAddress = await mintclub.wallet.account();
+    useGlobalStore.setState({ account: currentAddress });
+    useGlobalStore.setState({ userLoading: false });
+  }
 
   async function connect() {
     try {
-      setLoading(true);
+      useGlobalStore.setState({ userLoading: true });
       // TODO: connect wallet using sdk
-      const address = await mintclub.wallet.connect();
-      toast.success('지갑 연결 성공!');
-      setAccount(address);
+      await mintclub.wallet.connect();
     } catch (e: any) {
       console.error(e);
       toast.error(e?.message);
     } finally {
-      setLoading(false);
+      syncAccount();
     }
   }
 
   useEffect(() => {
-    async function checkConnection() {
-      setLoading(true);
-      // TODO: check if user is already connected
-      const alreadyConnected = await mintclub.wallet.account();
-      setAccount(alreadyConnected);
-      setLoading(false);
-    }
-
-    checkConnection();
+    syncAccount();
   }, []);
 
-  return { isUserLoading, account, connect };
+  async function disconnect() {
+    // TODO: disconnect wallet using sdk
+    await mintclub.wallet.disconnect();
+    await syncAccount();
+  }
+
+  async function change() {
+    // TODO: change wallet using sdk
+    await mintclub.wallet.change();
+    await syncAccount();
+  }
+
+  return {
+    isUserLoading: !account && userLoading,
+    account,
+    connect,
+    disconnect,
+    change,
+  };
 }
