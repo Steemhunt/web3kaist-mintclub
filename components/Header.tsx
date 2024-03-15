@@ -8,7 +8,7 @@ import useWallet from '@/hooks/useWallet';
 import { useGlobalStore } from '@/stores/global';
 import { bebas } from '@/styles/fonts';
 import { cn } from '@/utils/classnames';
-import { abbreviateAddress } from '@/utils/strings';
+import { abbreviateAddress, customShortenNumber } from '@/utils/strings';
 import { commify, shortenNumber } from 'mint.club-v2-sdk';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -45,7 +45,7 @@ export default function Header() {
             <div className="text-end text-xs font-bold text-white">
               내 친구권 현재 가격{' '}
               <span className="text-green-500">
-                {commify(shortenNumber(myPrice * 1000))} KRW
+                {customShortenNumber(myPrice)}
               </span>
             </div>
           </div>
@@ -109,7 +109,7 @@ function HeaderButtons() {
                 {abbreviateAddress(account)}
               </span>
               <span className="font-bold">
-                ({commify(shortenNumber(balance * 1000))} KRW 보유중)
+                {customShortenNumber(balance)} 보유중
               </span>
             </Button>
             <Button

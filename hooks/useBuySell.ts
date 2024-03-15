@@ -26,7 +26,7 @@ export default function useBuySell(
         [estimation] = await nft.getSellEstimation(BigInt(amount));
       }
 
-      setEstimation(toNumber(estimation, 18) * 1000);
+      setEstimation(toNumber(estimation, 18));
     } finally {
       setEstimating(false);
     }
