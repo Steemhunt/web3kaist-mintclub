@@ -28,7 +28,8 @@ export default function useNft(address?: `0x${string}` | null) {
         info: { name, token, priceForNextMint, currentSupply, maxSupply },
       } = await nft.getDetail();
 
-      const imageUrl = await nft.getImageUri().catch(() => '');
+      const imageHash = await nft.getImageUri().catch(() => '');
+      const imageUrl = mintclub.ipfs.hashToGatewayUrl(imageHash);
 
       setData({
         name,

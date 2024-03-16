@@ -9,7 +9,7 @@ export async function uploadImage(formData: FormData) {
   if (!file) {
     throw new Error('image is required');
   }
-  const hash = await mintclub.uploadMediaToIpfs({
+  const hash = await mintclub.ipfs.upload({
     filebaseApiKey: FILEBASE_API_KEY,
     media: file as Blob,
   });
@@ -22,7 +22,7 @@ export async function uploadMetadata(formData: FormData) {
   if (!image || !name) {
     throw new Error('image and name are required');
   }
-  const hash = await mintclub.uploadMetadataToIpfs({
+  const hash = await mintclub.ipfs.uploadMetadata({
     filebaseApiKey: FILEBASE_API_KEY,
     image: image as `ipfs://${string}`,
     name: name as string,
