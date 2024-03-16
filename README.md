@@ -36,15 +36,15 @@ ctrl+f 로 에디터에서 `TODO:` 검색해보면 하나씩 직접 구현해보
 
 총 아홉개의 미션이 존재합니다
 
-1. Mission 1: connect wallet using sdk - https://sdk.mint.club/docs/sdk/wallet
-2. Mission 2: disconnect wallet using sdk
-3. Mission 3: change wallet using sdk
-4. Mission 4: create NFT using sdk - https://sdk.mint.club/docs/sdk/network/nft/create
-5. Mission 5: check if NFT exists using sdk
-6. Mission 6: fetch NFT detail using sdk - https://sdk.mint.club/docs/sdk/network/nft/getDetail
-7. Mission 7: fetch list of NFTs using sdk
-8. Mission 8: buy NFT using sdk - https://sdk.mint.club/docs/sdk/network/nft/buy
-9. Mission 9: sell NFT using sdk - https://sdk.mint.club/docs/sdk/network/nft/sell
+- Mission 1: connect wallet using sdk - https://sdk.mint.club/docs/sdk/wallet
+- Mission 2: disconnect wallet using sdk
+- Mission 3: change wallet using sdk
+- Mission 4: create NFT using sdk - https://sdk.mint.club/docs/sdk/network/nft/create
+- Mission 5: check if NFT exists using sdk
+- Mission 6: fetch NFT detail using sdk - https://sdk.mint.club/docs/sdk/network/nft/getDetail
+- Mission 7: fetch list of NFTs using sdk
+- Mission 8: buy NFT using sdk - https://sdk.mint.club/docs/sdk/network/nft/buy
+- Mission 9: sell NFT using sdk - https://sdk.mint.club/docs/sdk/network/nft/sell
 
 [https://sdk.mint.club](https://sdk.mint.club) 에서 힌트를 얻으실수있습니다!
 
