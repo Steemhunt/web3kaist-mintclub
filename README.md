@@ -41,7 +41,7 @@ ctrl+f 로 에디터에서 `TODO:` 검색해보면 하나씩 직접 구현해보
 3. Mission 3: change wallet using sdk
 4. Mission 4: create NFT using sdk - https://sdk.mint.club/docs/sdk/network/nft/create
 5. Mission 5: check if NFT exists using sdk
-6. Mission 6: fetch NFT detail using sdk - https://sdk.mint.club/docs/sdk/network/bond
+6. Mission 6: fetch NFT detail using sdk - https://sdk.mint.club/docs/sdk/network/getDetail
 7. Mission 7: fetch list of NFTs using sdk
 8. Mission 8: buy NFT using sdk - https://sdk.mint.club/docs/sdk/network/nft/buy
 9. Mission 9: sell NFT using sdk - https://sdk.mint.club/docs/sdk/network/nft/sell
