@@ -23,7 +23,7 @@ export default function useNft(address?: `0x${string}` | null) {
 
       setLoading(true);
       // TODO: Mission 6: fetch NFT detail using sdk
-      // https://sdk.mint.club/docs/sdk/network/bond
+      // https://sdk.mint.club/docs/sdk/network/nft/getDetail
 
       // ...
 

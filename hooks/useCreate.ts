@@ -32,6 +32,7 @@ export default function useCreate(symbol: string) {
   async function checkExisting(symbol: string) {
     setCheckingUsername(true);
     // TODO: Mission 5: check if NFT exists using sdk
+    // https://sdk.mint.club/docs/sdk/network/nft/exists
     // 이미 같은 심볼로 발행된 NFT 는 발행 불가능. 유저이름으로 사용.
     // ...
 
