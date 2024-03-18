@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "vercel --prod"
+    "deploy": "vercel build --prod && vercel deploy --prebuilt --prod"
   },
   "dependencies": {
     "@react-spring/three": "^9.6.1",
