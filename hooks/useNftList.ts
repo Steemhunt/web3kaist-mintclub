@@ -9,9 +9,11 @@ export default function useNftList() {
     try {
       // TODO: fetch list of tokens using sdk
       useGlobalStore.setState({ list: [] });
-      const list = await mintclub
-        .network('base')
-        .bond.getTokensByReserveToken(CHUNWON_TOKEN_ADDRESS);
+      const list = await mintclub.network('base').bond.getTokensByReserveToken({
+        reserveToken: CHUNWON_TOKEN_ADDRESS,
+        start: 500,
+        end: 2500,
+      });
 
       useGlobalStore.setState({ list });
     } catch (e) {
