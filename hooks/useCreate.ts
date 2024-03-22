@@ -13,7 +13,9 @@ export default function useCreate(symbol: string) {
     onSuccess: () => void,
     onError: (err: any) => void,
   ) {
-    // TODO: create NFT using sdk
+    // TODO: Mission 4: create NFT using sdk
+    // https://sdk.mint.club/docs/sdk/network/nft/create
+    // NFT 생성하기
     await mintclub
       .network('base')
       .nft(symbol)
@@ -39,7 +41,9 @@ export default function useCreate(symbol: string) {
 
   async function checkExisting(symbol: string) {
     setCheckingUsername(true);
-    // TODO: check if NFT exists using sdk
+    // TODO: Mission 5: check if NFT exists using sdk
+    // https://sdk.mint.club/docs/sdk/network/nft/exists
+    // 이미 같은 심볼로 발행된 NFT 는 발행 불가능. 유저이름으로 사용.
     const exists = await mintclub.network('base').nft(symbol).exists();
     setCheckingUsername(false);
     return exists;

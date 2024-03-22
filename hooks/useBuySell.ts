@@ -54,7 +54,8 @@ export default function useBuySell(
   async function buy(onSuccess: () => void) {
     try {
       setLoading(true);
-      // TODO: buy token using sdk
+      // TODO: Mission 8: buy NFT using sdk
+      // https://sdk.mint.club/docs/sdk/network/nft/buy
       await mintclub
         .network('base')
         .nft(tokenAddress)
@@ -89,7 +90,8 @@ export default function useBuySell(
   async function sell(onSuccess: () => void) {
     try {
       setLoading(true);
-      // TODO: sell token using sdk
+      // TODO: Mission 9: sell NFT using sdk
+      // https://sdk.mint.club/docs/sdk/network/nft/sell
 
       await mintclub
         .network('base')
