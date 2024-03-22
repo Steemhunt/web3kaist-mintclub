@@ -10,7 +10,6 @@ export default function useWallet() {
 
   async function syncAccount() {
     useGlobalStore.setState({ userLoading: true });
-    // TODO: check if user is already connected
     const currentAddress = await mintclub.wallet.account();
     useGlobalStore.setState({ account: currentAddress });
     useGlobalStore.setState({ userLoading: false });
