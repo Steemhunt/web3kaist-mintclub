@@ -12,9 +12,9 @@ export default function useProfile() {
   async function checkExistingProfile(account: `0x${string}`) {
     try {
       setChecking(true);
-      const tokens = await mintclub
-        .network('base')
-        .bond.getTokensByCreator(account);
+      const tokens = await mintclub.network('base').bond.getTokensByCreator({
+        creator: account,
+      });
 
       if (tokens.length > 0) {
         for (const token of tokens) {
