@@ -54,7 +54,7 @@ export default function useBuySell(
   async function buy(onSuccess: () => void) {
     try {
       setLoading(true);
-      // TODO: Mission 8: buy NFT using sdk
+      // TODO: Mission 7: buy NFT using sdk
       // https://sdk.mint.club/docs/sdk/network/nft/buy
 
       // ...
@@ -66,7 +66,7 @@ export default function useBuySell(
   async function sell(onSuccess: () => void) {
     try {
       setLoading(true);
-      // TODO: Mission 9: sell NFT using sdk
+      // TODO: Mission 8: sell NFT using sdk
       // https://sdk.mint.club/docs/sdk/network/nft/sell
 
       // ...
