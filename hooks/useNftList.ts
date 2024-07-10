@@ -14,8 +14,6 @@ export default function useNftList() {
         end: 20000,
       });
 
-      console.log(list);
-
       useGlobalStore.setState({ list });
     } catch (e) {
       console.error(e);
